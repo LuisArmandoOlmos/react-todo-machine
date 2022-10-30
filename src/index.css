@@ -1,13 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @apply bg-main-white font-montserrat m-0 text-main-dark;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.icon {
+  @apply cursor-pointer flex justify-center items-center h-12 w-12 text-2xl font-normal;
+}
+
+.addButton {
+  @apply bg-main-cian border-none bottom-6 cursor-pointer fixed flex justify-center font-bold h-16 w-16 items-center right-6 rounded-full text-5xl text-main-white hover:-rotate-12;
 }
