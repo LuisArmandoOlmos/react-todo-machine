@@ -32,6 +32,20 @@ export const App = () => {
     });
   }
 
+  const checkTodo = (text) => {
+    const todoIndex = todoList.findIndex((todo) => todo.text === text);
+    const newTodoList = [...todoList];
+    newTodoList[todoIndex].complete = true;
+    settodoList(newTodoList);
+  };
+
+  const deleteTodo = (text) => {
+    const todoIndex = todoList.findIndex((todo) => todo.text === text);
+    const newTodoList = [...todoList];
+    newTodoList.splice(todoIndex, 1);
+    settodoList(newTodoList);
+  };
+
   return (
     <>
       <TodoCounter totalTodos={totalTodos} checkTodos={checkTodos} />
@@ -42,6 +56,8 @@ export const App = () => {
             key={todo.text}
             text={todo.text}
             completed={todo.complete}
+            onCheckTodo={() => checkTodo(todo.text)}
+            onDeleteTodo={() => deleteTodo(todo.text)}
           />
         ))}
       </TodoList>
