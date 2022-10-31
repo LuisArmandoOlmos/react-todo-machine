@@ -1,3 +1,12 @@
 export const CreateTodoButton = () => {
-  return <button className="addButton">+</button>;
+  const onClickCreateTodoButton = (msg) => alert(msg);
+
+  return (
+    <button
+      className="addButton"
+      onClick={() => onClickCreateTodoButton("Aquí se debería abrir un modal")}
+    >
+      +
+    </button>
+  );
 };
