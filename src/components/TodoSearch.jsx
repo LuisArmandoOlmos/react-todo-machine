@@ -1,7 +1,4 @@
-import { useState } from "react";
-
-export const TodoSearch = () => {
-  const [searchValue, setSearchValue] = useState("");
+export const TodoSearch = ({ searchValue, setSearchValue }) => {
   const onChangeSearchValue = ({ target }) => {
     console.log(target.value);
     setSearchValue(target.value);
