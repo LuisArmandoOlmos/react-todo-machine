@@ -7,6 +7,8 @@ import {
 } from "./components";
 
 export const AppUI = ({
+  loading,
+  error,
   totalTodos,
   checkTodos,
   searchValue,
@@ -20,6 +22,9 @@ export const AppUI = ({
       <TodoCounter totalTodos={totalTodos} checkTodos={checkTodos} />
       <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
       <TodoList>
+        {error && <p>Ocurrio un error</p>}
+        {loading && <p>Cargando...</p>}
+        {!loading && totalTodos == 0 && <p>Agrega un TODO</p>}
         {searchTodos.map((todo) => (
           <TodoItem
             key={todo.text}
