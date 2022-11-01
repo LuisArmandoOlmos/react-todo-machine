@@ -1,15 +1,38 @@
+import { stringify } from "postcss";
 import React, { useState } from "react";
 import { AppUI } from "./AppUI";
 
-const defaulTodos = [
+/* const defaulTodos = [
   { text: "Cortar cebolla", complete: false },
   { text: "Tomar el curso de intro a reatc", complete: false },
   { text: "Llorar con la llorona", complete: true },
-];
+]; */
+
+export const useLocalStorage = (itemName, initialValue) => {
+  const localStorageItem = localStorage.getItem(itemName);
+  let parsedItem;
+
+  if (!localStorageItem) {
+    localStorage.setItem(itemName, JSON.stringify([]));
+    parsedItem = initialValue;
+  } else {
+    parsedItem = JSON.parse(localStorageItem);
+  }
+
+  const [item, setItem] = useState(parsedItem);
+
+  const saveItem = (newItem) => {
+    const stringifyNewItem = JSON.stringify(newItem);
+    localStorage.setItem(itemName, stringifyNewItem);
+    setItem(newItem);
+  };
+
+  return [item, saveItem];
+};
 
 export const App = () => {
+  const [todoList, saveTodoList] = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = useState("");
-  const [todoList, settodoList] = useState(defaulTodos);
 
   const totalTodos = todoList.length;
   const checkTodos = todoList.filter((todo) => !!todo.complete).length;
@@ -30,14 +53,14 @@ export const App = () => {
     const todoIndex = todoList.findIndex((todo) => todo.text === text);
     const newTodoList = [...todoList];
     newTodoList[todoIndex].complete = true;
-    settodoList(newTodoList);
+    saveTodoList(newTodoList);
   };
 
   const deleteTodo = (text) => {
     const todoIndex = todoList.findIndex((todo) => todo.text === text);
     const newTodoList = [...todoList];
     newTodoList.splice(todoIndex, 1);
-    settodoList(newTodoList);
+    saveTodoList(newTodoList);
   };
 
   return (
