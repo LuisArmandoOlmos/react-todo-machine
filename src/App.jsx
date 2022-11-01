@@ -1,5 +1,4 @@
-import { stringify } from "postcss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AppUI } from "./AppUI";
 
 /* const defaulTodos = [
@@ -9,29 +8,54 @@ import { AppUI } from "./AppUI";
 ]; */
 
 export const useLocalStorage = (itemName, initialValue) => {
-  const localStorageItem = localStorage.getItem(itemName);
-  let parsedItem;
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [item, setItem] = useState(initialValue);
 
-  if (!localStorageItem) {
-    localStorage.setItem(itemName, JSON.stringify([]));
-    parsedItem = initialValue;
-  } else {
-    parsedItem = JSON.parse(localStorageItem);
-  }
+  useEffect(() => {
+    setTimeout(() => {
+      try {
+        const localStorageItem = localStorage.getItem(itemName);
+        let parsedItem;
 
-  const [item, setItem] = useState(parsedItem);
+        if (!localStorageItem) {
+          localStorage.setItem(itemName, JSON.stringify([]));
+          parsedItem = initialValue;
+        } else {
+          parsedItem = JSON.parse(localStorageItem);
+        }
+
+        setItem(parsedItem);
+        setLoading(false);
+      } catch (error) {}
+    }, 1000);
+  }, []);
 
   const saveItem = (newItem) => {
-    const stringifyNewItem = JSON.stringify(newItem);
-    localStorage.setItem(itemName, stringifyNewItem);
-    setItem(newItem);
+    try {
+      const stringifyNewItem = JSON.stringify(newItem);
+      localStorage.setItem(itemName, stringifyNewItem);
+      setItem(newItem);
+    } catch (error) {
+      setError(error);
+    }
   };
 
-  return [item, saveItem];
+  return {
+    error,
+    item,
+    loading,
+    saveItem,
+  };
 };
 
 export const App = () => {
-  const [todoList, saveTodoList] = useLocalStorage("TODOS_V1", []);
+  const {
+    error,
+    item: todoList,
+    loading,
+    saveItem: saveTodoList,
+  } = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = useState("");
 
   const totalTodos = todoList.length;
@@ -65,13 +89,15 @@ export const App = () => {
 
   return (
     <AppUI
-      totalTodos={totalTodos}
+      checkTodo={checkTodo}
       checkTodos={checkTodos}
+      deleteTodo={deleteTodo}
+      error={error}
+      loading={loading}
+      searchTodos={searchTodos}
       searchValue={searchValue}
       setSearchValue={setSearchValue}
-      searchTodos={searchTodos}
-      checkTodo={checkTodo}
-      deleteTodo={deleteTodo}
+      totalTodos={totalTodos}
     />
   );
 };
