@@ -5,36 +5,38 @@ import {
   TodoList,
   TodoSearch,
 } from "./components";
+import { TodoContex } from "./contexts/TodoContext";
 
-export const AppUI = ({
-  loading,
-  error,
-  totalTodos,
-  checkTodos,
-  searchValue,
-  setSearchValue,
-  searchTodos,
-  checkTodo,
-  deleteTodo,
-}) => {
+export const AppUI = () => {
   return (
     <>
-      <TodoCounter totalTodos={totalTodos} checkTodos={checkTodos} />
-      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
-      <TodoList>
-        {error && <p>Ocurrio un error</p>}
-        {loading && <p>Cargando...</p>}
-        {!loading && totalTodos == 0 && <p>Agrega un TODO</p>}
-        {searchTodos.map((todo) => (
-          <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.complete}
-            onCheckTodo={() => checkTodo(todo.text)}
-            onDeleteTodo={() => deleteTodo(todo.text)}
-          />
-        ))}
-      </TodoList>
+      <TodoCounter />
+      <TodoSearch />
+      <TodoContex.Consumer>
+        {({
+          checkTodo,
+          deleteTodo,
+          error,
+          loading,
+          searchTodos,
+          totalTodos,
+        }) => (
+          <TodoList>
+            {error && <p>Ocurrio un error</p>}
+            {loading && <p>Cargando...</p>}
+            {!loading && totalTodos == 0 && <p>Agrega un TODO</p>}
+            {searchTodos.map((todo) => (
+              <TodoItem
+                completed={todo.complete}
+                key={todo.text}
+                onCheckTodo={() => checkTodo(todo.text)}
+                onDeleteTodo={() => deleteTodo(todo.text)}
+                text={todo.text}
+              />
+            ))}
+          </TodoList>
+        )}
+      </TodoContex.Consumer>
       <CreateTodoButton />
     </>
   );
