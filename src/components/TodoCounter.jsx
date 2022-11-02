@@ -1,4 +1,9 @@
-export const TodoCounter = ({ totalTodos, checkTodos }) => {
+import { useContext } from "react";
+import { TodoContex } from "../contexts/TodoContext";
+
+export const TodoCounter = () => {
+  const { totalTodos, checkTodos } = useContext(TodoContex);
+
   return (
     <h2 className="m-0 p-12 text-2xl text-center">
       Has completado {checkTodos} de {totalTodos} Todos
