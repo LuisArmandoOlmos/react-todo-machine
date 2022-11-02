@@ -51,6 +51,7 @@ export const TodoProvider = ({ children }) => {
         searchTodos,
         searchValue,
         setSearchValue,
+        totalTodos
       }}
     >
       {children}
