@@ -13,6 +13,7 @@ module.exports = {
         "main-gray": "#A5A5A5",
         "main-cian": "#61DAFA;",
         "main-green": "#4caf50",
+        "main-darkGreen": "#082023"
       },
     },
   },

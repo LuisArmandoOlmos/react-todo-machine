@@ -9,7 +9,9 @@ export const TodoProvider = ({ children }) => {
     loading,
     saveItem: saveTodoList,
   } = useLocalStorage("TODOS_V1", []);
+
   const [searchValue, setSearchValue] = useState("");
+  const [openCreateTodo, setOpenCreateTodo] = useState(false);
 
   const totalTodos = todoList.length;
   const checkTodos = todoList.filter((todo) => !!todo.complete).length;
@@ -25,6 +27,16 @@ export const TodoProvider = ({ children }) => {
       return todoText.includes(searchValueText);
     });
   }
+
+  const addTodo = (text) => {
+    const newTodo = {
+      complete: false,
+      text: text
+    }
+    const newTodoList = [...todoList];
+    newTodoList.push(newTodo)
+    saveTodoList(newTodoList);
+  };
 
   const checkTodo = (text) => {
     const todoIndex = todoList.findIndex((todo) => todo.text === text);
@@ -43,15 +55,18 @@ export const TodoProvider = ({ children }) => {
   return (
     <TodoContex.Provider
       value={{
-        checkTodo,
         checkTodos,
-        deleteTodo,
         error,
         loading,
+        openCreateTodo,
         searchTodos,
         searchValue,
+        totalTodos,
+        addTodo,
+        checkTodo,
+        deleteTodo,
+        setOpenCreateTodo,
         setSearchValue,
-        totalTodos
       }}
     >
       {children}
