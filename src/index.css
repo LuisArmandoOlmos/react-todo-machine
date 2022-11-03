@@ -13,5 +13,20 @@ body {
 }
 
 .addButton {
-  @apply bg-main-cian border-none bottom-6 cursor-pointer fixed flex justify-center font-bold h-16 w-16 items-center right-6 rounded-full text-5xl text-main-white hover:-rotate-12;
+  @apply
+    bg-main-cian
+    border-none
+    bottom-6
+    cursor-pointer
+    fixed flex
+    font-bold h-16
+    items-center
+    justify-center
+    right-6
+    rounded-full
+    text-5xl
+    text-main-white
+    w-16
+    z-10
+    hover:-rotate-12;
 }

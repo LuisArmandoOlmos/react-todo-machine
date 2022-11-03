@@ -2,15 +2,25 @@ import { useContext } from "react";
 import {
   CreateTodoButton,
   TodoCounter,
+  TodoForm,
   TodoItem,
   TodoList,
   TodoSearch,
 } from "./components";
 import { TodoContex } from "./contexts/TodoContext";
+import { CreateTodo } from "./modal/  CreateTodo";
 
 export const AppUI = () => {
-  const { checkTodo, deleteTodo, error, loading, searchTodos, totalTodos } =
-    useContext(TodoContex);
+  const {
+    checkTodo,
+    deleteTodo,
+    error,
+    loading,
+    openCreateTodo,
+    searchTodos,
+    setOpenCreateTodo,
+    totalTodos,
+  } = useContext(TodoContex);
 
   return (
     <>
@@ -30,6 +40,11 @@ export const AppUI = () => {
           />
         ))}
       </TodoList>
+      {!!openCreateTodo && (
+        <CreateTodo>
+          <TodoForm />
+        </CreateTodo>
+      )}
       <CreateTodoButton />
     </>
   );
