@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { TodoContex } from "./TodoContext";
+import { useLocalStorage } from "./useLocalStorage";
 
-export const TodoProvider = ({ children }) => {
+export const useTodo = () => {
   const {
     error,
     item: todoList,
@@ -18,7 +17,7 @@ export const TodoProvider = ({ children }) => {
 
   let searchTodos = [];
 
-  if (searchValue == "") {
+  if (searchValue === "") {
     searchTodos = todoList;
   } else {
     searchTodos = todoList.filter((todo) => {
@@ -31,10 +30,10 @@ export const TodoProvider = ({ children }) => {
   const addTodo = (text) => {
     const newTodo = {
       complete: false,
-      text: text
-    }
+      text: text,
+    };
     const newTodoList = [...todoList];
-    newTodoList.push(newTodo)
+    newTodoList.push(newTodo);
     saveTodoList(newTodoList);
   };
 
@@ -52,24 +51,18 @@ export const TodoProvider = ({ children }) => {
     saveTodoList(newTodoList);
   };
 
-  return (
-    <TodoContex.Provider
-      value={{
-        checkTodos,
-        error,
-        loading,
-        openCreateTodo,
-        searchTodos,
-        searchValue,
-        totalTodos,
-        addTodo,
-        checkTodo,
-        deleteTodo,
-        setOpenCreateTodo,
-        setSearchValue,
-      }}
-    >
-      {children}
-    </TodoContex.Provider>
-  );
+  return {
+    checkTodos,
+    error,
+    loading,
+    openCreateTodo,
+    searchTodos,
+    searchValue,
+    totalTodos,
+    addTodo,
+    checkTodo,
+    deleteTodo,
+    setOpenCreateTodo,
+    setSearchValue,
+  };
 };

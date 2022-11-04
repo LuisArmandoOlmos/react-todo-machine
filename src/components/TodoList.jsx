@@ -1,7 +1,24 @@
-export const TodoList = ({ children }) => {
+export const TodoList = ({
+  children,
+  error,
+  loading,
+  searchTodos,
+  totalTodos,
+  onError,
+  onLoading,
+  onEmptyTodoList,
+  render,
+}) => {
   return (
     <section>
-      <ul className="list-none m-0 pb-14">{children}</ul>
+      {error && onError()}
+      {loading && onLoading()}
+      {!loading && totalTodos === 0 && onEmptyTodoList()}
+      {searchTodos.map(render)}
+
+      <ul className="list-none m-0 pb-14">
+        {children}
+      </ul>
     </section>
   );
 };
