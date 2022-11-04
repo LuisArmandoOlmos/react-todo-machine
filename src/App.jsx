@@ -12,6 +12,7 @@ import { useTodo } from "./hooks/useTodo";
 import { TodoError } from "./components/TodoError";
 import { TodoLoading } from "./components/TodoLoading";
 import { EmptyTodoList } from "./components/EmptyTodoList";
+import { TodoNotFound } from "./components/TodoNotFound";
 
 export const App = () => {
   const {
@@ -20,6 +21,7 @@ export const App = () => {
     loading,
     openCreateTodo,
     searchTodos,
+    searchValue,
     totalTodos,
     addTodo,
     checkTodo,
@@ -39,10 +41,12 @@ export const App = () => {
         error={error}
         loading={loading}
         searchTodos={searchTodos}
+        searchValue={searchValue}
         totalTodos={totalTodos}
+        onEmptyTodoList={() => <EmptyTodoList />}
         onError={() => <TodoError />}
         onLoading={() => <TodoLoading />}
-        onEmptyTodoList={() => <EmptyTodoList />}
+        onTodoNotFound={() => <TodoNotFound searchValue={searchValue} />}
         render={(todo) => (
           <TodoItem
             complete={todo.complete}
