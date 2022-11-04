@@ -1,6 +1,5 @@
 export const TodoSearch = ({ setSearchValue }) => {
   const onChangeSearchValue = ({ target }) => {
-    console.log(target.value);
     setSearchValue(target.value);
   };
 
