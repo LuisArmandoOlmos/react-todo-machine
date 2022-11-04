@@ -1,18 +1,16 @@
-export const TodoItem = ({ text, completed, onCheckTodo, onDeleteTodo }) => {
-  const onClickCheck = () => alert(`Hiciste check al todo: ${text}`);
-  const onClickDelete = () => alert(`Borraste el todo: ${text} `);
+export const TodoItem = ({ text, complete, onCheckTodo, onDeleteTodo }) => {
 
   return (
     <li className="bg-main-white flex items-center justify-center mt-6 relative shadow-2xl">
       <span
-        className={`icon absolute left-3 ${completed && "text-main-green"}`}
+        className={`icon absolute left-3 ${complete && "text-main-green"}`}
         onClick={onCheckTodo}
       >
         √
       </span>
       <p
         className={`font-normal ml-6 my-6 text text-lg w-[(100%-120px)] ${
-          completed && "line-through"
+          complete && "line-through"
         }`}
       >
         {text}

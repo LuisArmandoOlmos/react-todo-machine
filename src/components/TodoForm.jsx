@@ -1,9 +1,7 @@
-import { useContext, useState } from "react";
-import { TodoContex } from "../contexts/TodoContext";
+import { useState } from "react";
 
-export const TodoForm = () => {
+export const TodoForm = ({ addTodo, setOpenCreateTodo }) => {
   const [todoText, setTodoText] = useState("");
-  const { addTodo, setOpenCreateTodo } = useContext(TodoContex);
 
   const onCancel = () => {
     setOpenCreateTodo((prevState) => !prevState);
@@ -34,10 +32,17 @@ export const TodoForm = () => {
         placeholder="Create your first TODO"
       ></textarea>
       <div>
-        <button onClick={onCancel} type="button" className="text-main-dark rounded-sm border-2 border-solid border-main-black m-2 p-1">
+        <button
+          onClick={onCancel}
+          type="button"
+          className="text-main-dark rounded-sm border-2 border-solid border-main-black m-2 p-1"
+        >
           Cancel
         </button>
-        <button type="submit" className="text-main-dark bg-main-cian m-2 p-1 rounded-sm border-2 border-solid border-main-black">
+        <button
+          type="submit"
+          className="text-main-dark bg-main-cian m-2 p-1 rounded-sm border-2 border-solid border-main-black"
+        >
           Add
         </button>
       </div>
