@@ -1,3 +1,3 @@
 export const TodoError = () => {
-  return <p>An error occurred!</p>;
+  return <p className="mt-4 px-6">An error occurred!</p>;
 };
