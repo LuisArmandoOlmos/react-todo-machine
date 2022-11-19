@@ -1,3 +1,3 @@
 export const EmptyTodoList = () => {
-  return <p>Create a TODO!</p>;
+  return <p className="mt-4 px-6">Create a TODO!</p>;
 };

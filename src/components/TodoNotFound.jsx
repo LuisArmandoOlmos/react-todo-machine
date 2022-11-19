@@ -1,3 +1,3 @@
 export const TodoNotFound = ({ searchValue }) => {
-  return <p>Not found the TODO: {searchValue}</p>;
+  return <p className="mt-4 px-6">Not found the TODO: {searchValue}</p>;
 };

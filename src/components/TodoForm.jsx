@@ -23,7 +23,7 @@ export const TodoForm = ({ addTodo, setOpenCreateTodo }) => {
       className="w-11/12 max-w-xs bg-white py-8 px-10 flex justify-center items-center flex-col "
     >
       <label className="text-center font-normal text-xl text-main-dark mb-6">
-        Create TODO
+        Create TODO!
       </label>
       <textarea
         className="text-main-black rounded-sm border-2 border-solid border-main-black text-xl text-center p-3 h-24 w-[calc(100%-25px)]"

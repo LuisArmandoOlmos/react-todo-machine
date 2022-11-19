@@ -17,7 +17,7 @@ export const TodoList = ({
       {error && onError()}
       {loading && onLoading()}
       {!loading && totalTodos === 0 && onEmptyTodoList()}
-      {!loading && searchTodos.length === 0 && onTodoNotFound()}
+      {!loading && totalTodos !== 0 && searchTodos.length === 0 && onTodoNotFound()}
       {searchTodos.map(render)}
 
       <ul className="list-none m-0 pb-14">

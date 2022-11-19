@@ -1,3 +1,6 @@
 export const TodoHeader = ({ children }) => {
-  return <header>{children}</header>;
-};
+  return(
+  <header>
+    {children}
+  </header>
+)};
